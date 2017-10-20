@@ -38,7 +38,8 @@ defmodule Example.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
-      {:floki, "~> 0.7", only: :test}
+      {:floki, "~> 0.7", only: :test},
+      {:assert_value, "~> 0.7", only: :test}
     ]
   end
 end

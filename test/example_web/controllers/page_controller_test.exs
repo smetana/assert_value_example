@@ -1,18 +1,26 @@
 defmodule ExampleWeb.PageControllerTest do
   use ExampleWeb.ConnCase
+  import AssertValue
+
+  defp serialize_response(conn) do
+    %Plug.Conn{status: status, resp_body: body} = conn
+    "Status: #{status}" <>
+    "\nTitle: " <>
+    (body
+      |> Floki.find("title")
+      |> Floki.text) <>
+    "\n" <>
+    (body
+      |> Floki.find("h1,h2,h3,h4")
+      |> Enum.map(fn({tagName, _attrs, content}) ->
+          "#{tagName}: #{Floki.text(content)}"
+         end)
+      |> Enum.join("\n")) <>
+    "\n"
+  end
 
   test "GET /", %{conn: conn} do
     conn = get conn, "/"
-    assert html_response(conn, 200)
-    body = html_response(conn, 200)
-    title = Floki.find(body, "title")
-      |> Floki.text
-    assert title == "Hello Example!"
-    header = Floki.find(body, "h2")
-      |> Floki.text
-    assert header == "Welcome to Phoenix!"
-    sections = Floki.find(body, "h4")
-      |> Enum.map(&Floki.text/1)
-    assert sections == ["Resources", "Help"]
+    assert_value serialize_response(conn)
   end
 end
