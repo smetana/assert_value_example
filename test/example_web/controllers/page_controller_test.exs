@@ -32,6 +32,10 @@ defmodule ExampleWeb.PageControllerTest do
 
   test "GET /hello", %{conn: conn} do
     conn = get conn, "/hello"
-    assert_value serialize_response(conn)
+    assert_value serialize_response(conn) == """
+    Status: 200
+    Title: Hello Example!
+    h2: Hello World
+    """
   end
 end
