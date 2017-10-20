@@ -23,7 +23,7 @@ defmodule ExampleWeb.PageControllerTest do
     conn = get conn, "/"
     assert_value serialize_response(conn) == """
     Status: 200
-    Title: Hello Example!
+    Title: My App Example!
     h2: Welcome to Phoenix!
     h4: Resources
     h4: Help
@@ -34,7 +34,7 @@ defmodule ExampleWeb.PageControllerTest do
     conn = get conn, "/hello"
     assert_value serialize_response(conn) == """
     Status: 200
-    Title: Hello Example!
+    Title: My App Example!
     h2: Hello World
     """
   end
