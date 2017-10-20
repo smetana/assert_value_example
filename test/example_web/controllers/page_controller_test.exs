@@ -29,4 +29,9 @@ defmodule ExampleWeb.PageControllerTest do
     h4: Help
     """
   end
+
+  test "GET /hello", %{conn: conn} do
+    conn = get conn, "/hello"
+    assert_value serialize_response(conn)
+  end
 end
